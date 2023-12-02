@@ -9,7 +9,7 @@ function connexionCheck() {
     teacherAccountType.checked ||
     adminAccountType.checked
   ) {
-    return true;
+    return false;
   } else {
     console.log("Error");
     return false;

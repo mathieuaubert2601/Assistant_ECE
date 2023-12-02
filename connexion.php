@@ -25,12 +25,15 @@ $db_found = mysqli_select_db($db_handle, $database);
             <table>
                 <tr>
                     <td>Type de compte : </td>
-                    <td><input type="radio" name="accountType" value="teacher" class="teacherRadio" /> Professeur</td>
-                    <td><input type="radio" name="accountType" value="student" class="studentRadio" /> Assistant</td>
-                    <td><input type="radio" name="accountType" value="administrator" class="adminRadio" />
+                    <td><input type="radio" name="accountType" value="teacher" class="teacherRadio" /> Professeur
+                        <input type="radio" name="accountType" value="student" class="studentRadio" /> Assistant
+                        <input type="radio" name="accountType" value="administrator" class="adminRadio" />
                         Administrateur
                     </td>
                 </tr>
+
+
+
                 <tr>
                     <td>Email :</td>
                     <td><input type="email" name="accountUsername" required></td>
@@ -40,9 +43,18 @@ $db_found = mysqli_select_db($db_handle, $database);
                     <td><input type="passsword" name="accountPassword" required></td>
                 </tr>
             </table>
-            <input type="submit" name="connexionButton" value="Connexion" onsubmit="connexionCheck()">
-            <p style="visibility: hidden;" class="errorMessageConnexion">Vous n'avez pas sélectionné un type de compte
-            </p>
+            <input type="submit" name="connexionButton" value="Connexion">
+            <?php
+            if (isset($_GET['erreur'])) {
+                $err = $_GET['erreur'];
+                if ($err == 1)
+                    echo "<p style='color:red'>Utilisateur ou mot de passe incorrect</p>";
+                else if ($err == 2)
+                    echo "<p style='color:red'>Utilisateur ou mot de passe non saisis</p>";
+                else if ($err == 3)
+                    echo "<p style='color:red'>Aucun type de compte sélectionné</p>";
+            }
+            ?>
         </form>
     </div>
 </body>
