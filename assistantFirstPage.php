@@ -24,6 +24,7 @@ if (!isset($_SESSION['utilisateur_ID'])) {
 <body>
     <div>
         <a href='connexionProcessing.php?deconnexion=true'><span>Déconnexion</span></a>
+        <a href='addSession.php'><span>Ajouter une séance</span></a>
     </div>
 </body>
 

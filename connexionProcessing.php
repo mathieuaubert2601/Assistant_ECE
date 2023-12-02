@@ -34,7 +34,12 @@ if (isset($_POST["accountUsername"]) && isset($_POST["accountPassword"]) && isse
             $row = mysqli_fetch_assoc($exec_requete);
             $num_rows = mysqli_num_rows($exec_requete);
             if ($num_rows > 0) {
-                $_SESSION['utilisateur_ID'] = $row['idAdministrateur'];
+                if ($type == "administrator")
+                    $_SESSION['utilisateur_ID'] = $row['idAdministrateur'];
+                else if ($type == "student")
+                    $_SESSION['utilisateur_ID'] = $row['IDAssistant'];
+                else if ($type == "teacher")
+                    $_SESSION['utilisateur_ID'] = $row['IDProfesseur'];
                 $_SESSION['statusConnexion'] = "1";
                 $_SESSION['accountType'] = $type;
 
