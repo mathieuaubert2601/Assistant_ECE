@@ -19,10 +19,10 @@ if (isset($_POST["accountUsername"]) && isset($_POST["accountPassword"]) && isse
 
     if ($username !== "" && $password !== "") {
         if ($type == "teacher") {
-            $query = "SELECT IDProfesseur FROM professeur WHERE Email = '" . $username . "' AND Password = '" . $password . "'";
+            $query = "SELECT IDProfesseur FROM professeur WHERE Email = '" . $username . "' AND PasswordAccount = '" . $password . "'";
         } else if ($type == "student") {
             // Ajoutez les colonnes à sélectionner dans la requête pour les étudiants
-            $query = "SELECT IDAssistant FROM assistant WHERE Email = '" . $username . "' AND Password = '" . $password . "'";
+            $query = "SELECT IDAssistant FROM assistant WHERE Email = '" . $username . "' AND PasswordAccount = '" . $password . "'";
         } else if ($type == "administrator") {
             $query = 'SELECT idAdministrateur FROM administrateur WHERE Email = "' . $username . '" AND PasswordAccount = "' . $password . '"';
         }

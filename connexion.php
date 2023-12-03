@@ -15,7 +15,6 @@ $db_found = mysqli_select_db($db_handle, $database);
 <head>
     <meta charset="utf-8" />
     <title>Assistant ECE</title>
-    <script src="connexion.js"></script>
 </head>
 
 <body>
@@ -40,7 +39,7 @@ $db_found = mysqli_select_db($db_handle, $database);
                 </tr>
                 <tr>
                     <td>Mot de passe :</td>
-                    <td><input type="passsword" name="accountPassword" required></td>
+                    <td><input type="password" name="accountPassword" required></td>
                 </tr>
             </table>
             <input type="submit" name="connexionButton" value="Connexion">

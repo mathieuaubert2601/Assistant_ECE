@@ -47,22 +47,22 @@ if (!isset($_SESSION['utilisateur_ID'])) {
                 if ($_SESSION["accountType"] == "administrator") {
                     echo "<tr>";
                     echo "<td>Entrer l'email de l'assistant</td>";
-                    echo "<td><input type='text' name='assistantEmail' required></td>";
+                    echo "<td><input type='email' name='assistantEmail' required></td>";
                     echo "</tr>";
 
                     echo "<tr>";
                     echo "<td>Entrer l'email du professeur : </td>";
-                    echo "<td><input type='text' name='teacherEmail' required></td>";
+                    echo "<td><input type='email' name='teacherEmail' required></td>";
                     echo "</tr>";
                 } else if ($_SESSION["accountType"] == "student") {
                     echo "<tr>";
                     echo "<td>Entrer l'email du professeur : </td>";
-                    echo "<td><input type='text' name='teacherEmail' required></td>";
+                    echo "<td><input type='email' name='teacherEmail' required></td>";
                     echo "</tr>";
                 } else if ($_SESSION["accountType"] == "teacher") {
                     echo "<tr>";
                     echo "<td>Entrer l'email de l'assistant</td>";
-                    echo "<td><input type='text' name='assistantEmail' required></td>";
+                    echo "<td><input type='email' name='assistantEmail' required></td>";
                     echo "</tr>";
                 }
                 ?>

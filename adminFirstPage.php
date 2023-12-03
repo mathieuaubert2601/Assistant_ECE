@@ -25,6 +25,8 @@ if (!isset($_SESSION['utilisateur_ID'])) {
     <div>
         <a href='connexionProcessing.php?deconnexion=true'><span>Déconnexion</span></a>
         <a href='addSession.php'><span>Ajouter une séance</span></a>
+        <a href='addAssistant.php'><span>Ajouter un assistant</span></a>
+        <a href='addTeacher.php'><span>Ajouter un professeur</span></a>
     </div>
 </body>
 
