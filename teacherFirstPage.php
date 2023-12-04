@@ -26,6 +26,7 @@ if (!isset($_SESSION['utilisateur_ID'])) {
         <a href='connexionProcessing.php?deconnexion=true'><span>Déconnexion</span></a>
         <a href='addSession.php'><span>Ajouter une séance</span></a>
         <a href='validateSession.php'><span>Valider une séance</span></a>
+        <a href='sessionHistory.php'><span>Historique des séances</span></a>
     </div>
 </body>
 

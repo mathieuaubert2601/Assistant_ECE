@@ -39,13 +39,6 @@ if (!isset($_SESSION['utilisateur_ID']) || ($_SESSION["accountType"] != "teacher
                 <td>Promo du TD </td>
                 <td>Heure du début </td>
                 <td>Heure de fin </td>
-                <?php
-                if (isset($_SESSION['accountType'])) {
-                    if ($_SESSION['accountType'] == 'teacher') {
-                        echo "<td>Validation de la séance </td>";
-                    }
-                }
-                ?>
             </tr>
             <?php
             $database = "assistant_ece";
@@ -58,7 +51,7 @@ if (!isset($_SESSION['utilisateur_ID']) || ($_SESSION["accountType"] != "teacher
 
                 if ($_SESSION["accountType"] == "teacher") {
                     $idProfesseur = $_SESSION["utilisateur_ID"];
-                    $query = "SELECT * from tp WHERE IDProfesseur = '" . $idProfesseur . "' AND StatusSession = 0";
+                    $query = "SELECT * from tp WHERE IDProfesseur = '" . $idProfesseur . "' AND StatusSession = 1";
                     $exec_requete = mysqli_query($db_handle, $query);
 
                     if ($exec_requete) {
@@ -88,11 +81,6 @@ if (!isset($_SESSION['utilisateur_ID']) || ($_SESSION["accountType"] != "teacher
                                         echo "<td>$promoGroup</td>";
                                         echo "<td>$dateFin</td>";
                                         echo "<td>$dateDebut</td>";
-                                        echo "<td>";
-                                        echo '<form method="GET" action="validerSessionProcessing.php">';
-                                        echo '<button type="submit" name="idSession" value="' . htmlspecialchars($idSession) . '">valider</button>';
-                                        echo "</form>";
-                                        echo "</td>";
                                         echo "</tr>";
                                     }
                                 }
@@ -101,7 +89,7 @@ if (!isset($_SESSION['utilisateur_ID']) || ($_SESSION["accountType"] != "teacher
                     }
                 } else if ($_SESSION["accountType"] == "student") {
                     $idAssistant = $_SESSION["utilisateur_ID"];
-                    $query = "SELECT * from tp WHERE IDAssistant = '" . $idAssistant . "' AND StatusSession = 0";
+                    $query = "SELECT * from tp WHERE IDAssistant = '" . $idAssistant . "' AND StatusSession = 1";
                     $exec_requete = mysqli_query($db_handle, $query);
 
                     if ($exec_requete) {
