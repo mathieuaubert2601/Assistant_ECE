@@ -7,7 +7,7 @@ $database = "assistant_ece";
 $db_handle = mysqli_connect("localhost", "root", "123456789");
 $db_found = mysqli_select_db($db_handle, $database);
 
-if (!isset($_SESSION['utilisateur_ID']) || ($_SESSION["accountType"] != "teacher" && $_SESSION["accountType"] != "student")) {
+if (!isset($_SESSION['utilisateur_ID'])) {
     header('Location: index.php');
 }
 ?>
@@ -31,6 +31,9 @@ if (!isset($_SESSION['utilisateur_ID']) || ($_SESSION["accountType"] != "teacher
                         echo "<td>Email Assistant </td>";
                     } else if ($_SESSION["accountType"] == "student") {
                         echo "<td>Email Professeur </td>";
+                    } else if ($_SESSION["accountType"] == "administrator") {
+                        echo "<td>Email Professeur </td>";
+                        echo "<td>Email Assistant </td>";
                     }
                 }
                 ?>
@@ -125,7 +128,61 @@ if (!isset($_SESSION['utilisateur_ID']) || ($_SESSION["accountType"] != "teacher
                             }
                         }
                     }
+                } else if ($_SESSION["accountType"] == "administrator") {
+                    $query = "SELECT * from tp WHERE StatusSession = 1";
+                    $exec_requete = mysqli_query($db_handle, $query);
+
+                    if ($exec_requete) {
+                        $num_rows = mysqli_num_rows($exec_requete);
+
+                        if ($num_rows > 0) {
+                            while ($data = mysqli_fetch_assoc($exec_requete)) {
+
+                                $idAssistant = $data['IDAssistant'];
+                                $idProfesseur = $data['IDProfesseur'];
+
+                                $queryAssistant = "SELECT Email FROM assistant where IDAssistant = '" . $idAssistant . "'";
+                                $exec_requete_Assistant = mysqli_query($db_handle, $queryAssistant);
+
+                                $queryProfesseur = "SELECT Email FROM professeur where IDProfesseur = '" . $idProfesseur . "'";
+                                $exec_requete_professeur = mysqli_query($db_handle, $queryProfesseur);
+
+                                if ($exec_requete_Assistant) {
+                                    $num_rows_Assistant = mysqli_num_rows($exec_requete_Assistant);
+                                    $data_Assistant = mysqli_fetch_assoc($exec_requete_Assistant);
+                                    if ($num_rows_Assistant > 0) {
+
+                                        if ($exec_requete_professeur) {
+                                            $num_rows_Professeur = mysqli_num_rows($exec_requete_professeur);
+                                            $data_Professeur = mysqli_fetch_assoc($exec_requete_professeur);
+
+                                            if ($num_rows_Professeur > 0) {
+                                                $emailProfesseur = $data_Professeur['Email'];
+                                                $emailAssistant = $data_Assistant['Email'];
+                                                $idSession = $data['IDTp'];
+                                                $tdGroup = $data['groupTP'];
+                                                $promoGroup = $data['promoTP'];
+                                                $dateFin = $data['DateFin'];
+                                                $dateDebut = $data['DateDebut'];
+                                                echo "<tr>";
+                                                echo "<td>$emailProfesseur</td>";
+                                                echo "<td>$emailAssistant</td>";
+                                                echo "<td>$tdGroup</td>";
+                                                echo "<td>$promoGroup</td>";
+                                                echo "<td>$dateFin</td>";
+                                                echo "<td>$dateDebut</td>";
+                                                echo "</tr>";
+                                            }
+
+                                        }
+
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
+
 
             }
             ?>
