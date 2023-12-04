@@ -8,7 +8,7 @@ $db_handle = mysqli_connect("localhost", "root", "123456789");
 $db_found = mysqli_select_db($db_handle, $database);
 
 if (!isset($_SESSION['utilisateur_ID'])) {
-    header('Location : index.php');
+    header('Location: index.php');
 }
 ?>
 
@@ -26,6 +26,7 @@ if (!isset($_SESSION['utilisateur_ID'])) {
         <a href='connexionProcessing.php?deconnexion=true'><span>Déconnexion</span></a>
         <a href='addSession.php'><span>Ajouter une séance</span></a>
         <a href='addAssistant.php'><span>Ajouter un assistant</span></a>
+        <a href='addTeacher.php'><span>Ajouter un professeur</span></a>
         <a href='addTeacher.php'><span>Ajouter un professeur</span></a>
     </div>
 </body>

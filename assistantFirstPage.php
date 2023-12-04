@@ -8,7 +8,7 @@ $db_handle = mysqli_connect("localhost", "root", "123456789");
 $db_found = mysqli_select_db($db_handle, $database);
 
 if (!isset($_SESSION['utilisateur_ID'])) {
-    header('Location : index.php');
+    header('Location: index.php');
 }
 ?>
 
