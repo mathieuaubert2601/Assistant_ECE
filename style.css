@@ -1,0 +1,67 @@
+body {
+    margin: 0;
+    height: 100vh;
+    background-color: rgb(200, 200, 201);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.connexionSection,
+.addAssistantSection,
+.addSessionSection,
+.addTeacherSection {
+    width: max-content;
+    height: max-content;
+}
+
+form {
+    width: 100%;
+    border: 1px solid #f1f1f1;
+    padding: 17% 7% 9% 7%;
+    background: #f4f2f2;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+    width: max-content;
+    height: max-content;
+}
+
+.connexionSection h2,
+.addAssistantSection h2,
+.addSessionSection h2,
+.addTeacherSection h2 {
+    margin: 0 auto;
+    padding-bottom: 7%;
+    text-align: center;
+}
+
+input[type=text],
+input[type=password],
+input[type=email],
+input[type=datetime-local] {
+    width: 100%;
+    margin: 3% auto;
+    padding: 2%;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+input[type=text] {
+    width: 15vw;
+}
+
+input[type=submit] {
+    background-color: #007179;
+    color: white;
+    padding: 3% 5%;
+    margin: 5% 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+}
+
+input[type=submit]:hover {
+    background-color: white;
+    color: #007179;
+    border: 1px solid #007179;
+}

@@ -27,7 +27,6 @@ if (!isset($_SESSION['utilisateur_ID'])) {
         <a href='addSession.php'><span>Ajouter une séance</span></a>
         <a href='addAssistant.php'><span>Ajouter un assistant</span></a>
         <a href='addTeacher.php'><span>Ajouter un professeur</span></a>
-        <a href='addTeacher.php'><span>Ajouter un professeur</span></a>
         <a href='sessionHistory.php'><span>Historique des séances</span></a>
     </div>
 </body>

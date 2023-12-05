@@ -19,31 +19,33 @@ if (!isset($_SESSION['utilisateur_ID'])) {
 <head>
     <meta charset="utf-8" />
     <title>Assistant ECE</title>
+    <link rel="stylesheet" href="style.css" media="screen" type="text/css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
 <body>
-    <div>
+    <div class="addAssistantSection">
         <form method="post" action="addAssistantProcessing.php">
-            <h2>Ajouter un assistant : </h2>
+            <h2>Ajouter un assistant </h2>
             <table>
                 <tr>
-                    <td>Entrer le prenom de l'assistant : </td>
+                    <td>Prénom : </td>
                     <td><input name="firstNameAssistant" type="text" required></td>
                 </tr>
                 <tr>
-                    <td>Entrer le nom de l'assistant : </td>
+                    <td>Nom : </td>
                     <td><input name="lastNameAssistant" type="text" required></td>
                 </tr>
                 <tr>
-                    <td>Entrer l'email de l'assistant : </td>
+                    <td>Email : </td>
                     <td><input name="emailAssistant" type="email" required></td>
                 </tr>
                 <tr>
-                    <td>Entrer le mot de passe de l'assistant : </td>
+                    <td>Mot de passe : </td>
                     <td><input name="passwordAssistant" type="password" required></td>
                 </tr>
                 <tr>
-                    <td>Confirmer le mot de passe de l'assistant : </td>
+                    <td>Confirmer mot de passe : </td>
                     <td><input name="confirmationPasswordAssistant" type="password" required></td>
                 </tr>
             </table>

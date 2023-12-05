@@ -19,12 +19,14 @@ if (!isset($_SESSION['utilisateur_ID'])) {
 <head>
     <meta charset="utf-8" />
     <title>Assistant ECE</title>
+    <link rel="stylesheet" href="style.css" media="screen" type="text/css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
 <body>
-    <div>
+    <div class="addTeacherSection">
         <form method="post" action="addTeacherProcessing.php">
-            <h2>Ajouter un professeur : </h2>
+            <h2>Ajouter un professeur</h2>
             <table>
                 <tr>
                     <td>Entrer le prenom du professeur : </td>

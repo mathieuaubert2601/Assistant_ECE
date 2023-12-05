@@ -15,6 +15,8 @@ $db_found = mysqli_select_db($db_handle, $database);
 <head>
     <meta charset="utf-8" />
     <title>Assistant ECE</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css" media="screen" type="text/css" />
 </head>
 
 <body>
