@@ -3,9 +3,9 @@ session_start();
 
 if (isset($_SESSION["accountType"])) {
     if ($_SESSION["accountType"] == "administrator") {
-        $database = "assistant_ece";
+        $database = "id21625993_assistante_ece";
         //Connexion à la base de données
-        $db_handle = mysqli_connect("localhost", "root", "123456789", $database);
+        $db_handle = mysqli_connect("localhost", "id21625993_adminece", "123456789aA@", $database);
 
         if (isset($_POST["firstNameAssistant"]) && isset($_POST["lastNameAssistant"]) && isset($_POST["emailAssistant"]) && isset($_POST["passwordAssistant"]) && isset($_POST["confirmationPasswordAssistant"])) {
             $emailAssistant = mysqli_real_escape_string($db_handle, htmlspecialchars($_POST['emailAssistant']));

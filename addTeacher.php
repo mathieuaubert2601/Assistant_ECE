@@ -1,10 +1,10 @@
 <?php
 //Déclarations de la base de données 
 session_start();
-$database = "assistant_ece";
+$database = "id21625993_assistante_ece";
 
 //Connexion à la base de données
-$db_handle = mysqli_connect("localhost", "root", "123456789");
+$db_handle = mysqli_connect("localhost", "id21625993_adminece", "123456789aA@");
 $db_found = mysqli_select_db($db_handle, $database);
 
 if (!isset($_SESSION['utilisateur_ID'])) {

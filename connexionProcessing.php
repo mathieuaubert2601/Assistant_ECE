@@ -5,9 +5,9 @@
 session_start();
 if (isset($_POST["accountUsername"]) && isset($_POST["accountPassword"]) && isset($_POST["accountType"])) {
 
-    $database = "assistant_ece";
+    $database = "id21625993_assistante_ece";
     //Connexion à la base de données
-    $db_handle = mysqli_connect("localhost", "root", "123456789", $database);
+    $db_handle = mysqli_connect("localhost", "id21625993_adminece", "123456789aA@", $database);
 
 
 

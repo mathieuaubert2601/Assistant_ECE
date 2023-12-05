@@ -5,9 +5,9 @@ if (isset($_SESSION["accountType"])) {
     if ($_SESSION["accountType"] == "teacher") {
         if (isset($_GET['idSession'])) {
 
-            $database = "assistant_ece";
+            $database = "id21625993_assistante_ece";
             //Connexion à la base de données
-            $db_handle = mysqli_connect("localhost", "root", "123456789", $database);
+            $db_handle = mysqli_connect("localhost", "id21625993_adminece", "123456789aA@", $database);
 
             $idSessionTP = $_GET['idSession'];
             $query = 'SELECT * FROM tp WHERE IDTp = "' . $idSessionTP . '"';
