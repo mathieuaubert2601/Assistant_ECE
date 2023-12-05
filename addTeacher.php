@@ -23,9 +23,9 @@ if (!isset($_SESSION['utilisateur_ID'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
-<body>
+<body class="pageFormulaire">
     <div class="addTeacherSection">
-        <form method="post" action="addTeacherProcessing.php">
+        <form method="post" action="addTeacherProcessing.php" class="addTeacherForm">
             <h2>Ajouter un professeur</h2>
             <table>
                 <tr>

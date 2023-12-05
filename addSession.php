@@ -23,9 +23,9 @@ if (!isset($_SESSION['utilisateur_ID'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
-<body>
+<body class="pageFormulaire">
     <div class="addSessionSection">
-        <form method="POST" action="addSessionProcessing.php">
+        <form method="POST" action="addSessionProcessing.php" class="addSessionForm">
             <h2>Ajout d'une séance de TP</h2>
             <table>
                 <tr>

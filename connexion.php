@@ -19,7 +19,7 @@ $db_found = mysqli_select_db($db_handle, $database);
     <link rel="stylesheet" href="style.css" media="screen" type="text/css" />
 </head>
 
-<body>
+<body class="pageFormulaire">
     <div class="connexionSection">
         <form class="connexionForm" action="connexionProcessing.php" method="post">
             <h2>Connexion</h2>

@@ -23,9 +23,9 @@ if (!isset($_SESSION['utilisateur_ID'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
-<body>
+<body class="pageFormulairepageFormulaire">
     <div class="addAssistantSection">
-        <form method="post" action="addAssistantProcessing.php">
+        <form method="post" action="addAssistantProcessing.php" class="addAssistantForm">
             <h2>Ajouter un assistant </h2>
             <table>
                 <tr>

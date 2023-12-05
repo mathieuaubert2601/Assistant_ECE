@@ -19,10 +19,12 @@ if (!isset($_SESSION['utilisateur_ID'])) {
 <head>
     <meta charset="utf-8" />
     <title>Assistant ECE</title>
+    <link rel="stylesheet" href="style.css" media="screen" type="text/css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
-<body>
-    <div>
+<body class="firstPage">
+    <div class="assistantFirstPageSection">
         <a href='connexionProcessing.php?deconnexion=true'><span>Déconnexion</span></a>
         <a href='addSession.php'><span>Ajouter une séance</span></a>
         <a href='validateSession.php'><span>Séance en cours de validation</span></a>

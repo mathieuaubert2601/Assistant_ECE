@@ -19,15 +19,21 @@ if (!isset($_SESSION['utilisateur_ID'])) {
 <head>
     <meta charset="utf-8" />
     <title>Assistant ECE</title>
+    <link rel="stylesheet" href="style.css" media="screen" type="text/css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
-<body>
-    <div>
-        <a href='connexionProcessing.php?deconnexion=true'><span>Déconnexion</span></a>
-        <a href='addSession.php'><span>Ajouter une séance</span></a>
-        <a href='addAssistant.php'><span>Ajouter un assistant</span></a>
-        <a href='addTeacher.php'><span>Ajouter un professeur</span></a>
-        <a href='sessionHistory.php'><span>Historique des séances</span></a>
+<body class="firstPage">
+    <div class="firstPageAdminSection">
+
+        <a href='connexionProcessing.php?deconnexion=true'><span>Déconnexion</span></a><br>
+        <a href='addSession.php'><span>Ajouter une séance</span></a><br>
+        <a href='addAssistant.php'><span>Ajouter un assistant</span></a><br>
+        <a href='addTeacher.php'><span>Ajouter un professeur</span></a><br>
+        <a href='sessionHistory.php'><span>Historique des séances</span></a><br>
+
+
+
     </div>
 </body>
 

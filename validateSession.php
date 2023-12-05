@@ -19,11 +19,13 @@ if (!isset($_SESSION['utilisateur_ID']) || ($_SESSION["accountType"] != "teacher
 <head>
     <meta charset="utf-8" />
     <title>Assistant ECE</title>
+    <link rel="stylesheet" href="style.css" media="screen" type="text/css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
 <body>
-    <div>
-        <table>
+    <div class="validateSessionSection">
+        <table class="validateSessionTable">
             <tr>
                 <?php
                 if (isset($_SESSION['accountType'])) {
