@@ -6,6 +6,11 @@ $database = "id21625993_assistante_ece";
 //Connexion à la base de données
 $db_handle = mysqli_connect("localhost", "id21625993_adminece", "123456789aA@");
 $db_found = mysqli_select_db($db_handle, $database);
+
+if(!isset($_SESSION['utilisateur_ID'])) {
+    header('Location: index.php');
+    exit();
+}
 ?>
 
 <!DOCTYPE html>
@@ -32,9 +37,6 @@ $db_found = mysqli_select_db($db_handle, $database);
                         Administrateur
                     </td>
                 </tr>
-
-
-
                 <tr>
                     <td>Email :</td>
                     <td><input type="email" name="accountUsername" required></td>
@@ -46,13 +48,13 @@ $db_found = mysqli_select_db($db_handle, $database);
             </table>
             <input type="submit" name="connexionButton" value="Connexion">
             <?php
-            if (isset($_GET['erreur'])) {
+            if(isset($_GET['erreur'])) {
                 $err = $_GET['erreur'];
-                if ($err == 1)
+                if($err == 1)
                     echo "<p style='color:red'>Utilisateur ou mot de passe incorrect</p>";
-                else if ($err == 2)
+                else if($err == 2)
                     echo "<p style='color:red'>Utilisateur ou mot de passe non saisis</p>";
-                else if ($err == 3)
+                else if($err == 3)
                     echo "<p style='color:red'>Aucun type de compte sélectionné</p>";
             }
             ?>

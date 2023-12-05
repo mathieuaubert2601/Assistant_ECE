@@ -7,8 +7,9 @@ $database = "id21625993_assistante_ece";
 $db_handle = mysqli_connect("localhost", "id21625993_adminece", "123456789aA@");
 $db_found = mysqli_select_db($db_handle, $database);
 
-if (!isset($_SESSION['utilisateur_ID'])) {
+if(!isset($_SESSION['utilisateur_ID'])) {
     header('Location: index.php');
+    exit();
 }
 ?>
 
@@ -28,12 +29,12 @@ if (!isset($_SESSION['utilisateur_ID'])) {
         <table class="historyTable">
             <tr>
                 <?php
-                if (isset($_SESSION['accountType'])) {
-                    if ($_SESSION['accountType'] == 'teacher') {
+                if(isset($_SESSION['accountType'])) {
+                    if($_SESSION['accountType'] == 'teacher') {
                         echo "<td>Email Assistant </td>";
-                    } else if ($_SESSION["accountType"] == "student") {
+                    } else if($_SESSION["accountType"] == "student") {
                         echo "<td>Email Professeur </td>";
-                    } else if ($_SESSION["accountType"] == "administrator") {
+                    } else if($_SESSION["accountType"] == "administrator") {
                         echo "<td>Email Professeur </td>";
                         echo "<td>Email Assistant </td>";
                     }
@@ -52,28 +53,28 @@ if (!isset($_SESSION['utilisateur_ID'])) {
             $db_handle = mysqli_connect("localhost", "id21625993_adminece", "123456789aA@");
             $db_found = mysqli_select_db($db_handle, $database);
 
-            if (isset($_SESSION["utilisateur_ID"])) {
+            if(isset($_SESSION["utilisateur_ID"])) {
 
-                if ($_SESSION["accountType"] == "teacher") {
+                if($_SESSION["accountType"] == "teacher") {
                     $idProfesseur = $_SESSION["utilisateur_ID"];
-                    $query = "SELECT * from tp WHERE IDProfesseur = '" . $idProfesseur . "' AND StatusSession = 1";
+                    $query = "SELECT * from tp WHERE IDProfesseur = '".$idProfesseur."' AND StatusSession = 1";
                     $exec_requete = mysqli_query($db_handle, $query);
 
-                    if ($exec_requete) {
+                    if($exec_requete) {
                         $num_rows = mysqli_num_rows($exec_requete);
 
-                        if ($num_rows > 0) {
-                            while ($data = mysqli_fetch_assoc($exec_requete)) {
+                        if($num_rows > 0) {
+                            while($data = mysqli_fetch_assoc($exec_requete)) {
 
                                 $idAssistant = $data['IDAssistant'];
 
-                                $queryAssistant = "SELECT Email FROM assistant where IDAssistant = '" . $idAssistant . "'";
+                                $queryAssistant = "SELECT Email FROM assistant where IDAssistant = '".$idAssistant."'";
                                 $exec_requete_Assistant = mysqli_query($db_handle, $queryAssistant);
 
-                                if ($exec_requete_Assistant) {
+                                if($exec_requete_Assistant) {
                                     $num_rows_Assistant = mysqli_num_rows($exec_requete_Assistant);
                                     $data_Assistant = mysqli_fetch_assoc($exec_requete_Assistant);
-                                    if ($num_rows_Assistant > 0) {
+                                    if($num_rows_Assistant > 0) {
                                         $emailAssistant = $data_Assistant['Email'];
                                         $idSession = $data['IDTp'];
                                         $tdGroup = $data['groupTP'];
@@ -92,26 +93,26 @@ if (!isset($_SESSION['utilisateur_ID'])) {
                             }
                         }
                     }
-                } else if ($_SESSION["accountType"] == "student") {
+                } else if($_SESSION["accountType"] == "student") {
                     $idAssistant = $_SESSION["utilisateur_ID"];
-                    $query = "SELECT * from tp WHERE IDAssistant = '" . $idAssistant . "' AND StatusSession = 1";
+                    $query = "SELECT * from tp WHERE IDAssistant = '".$idAssistant."' AND StatusSession = 1";
                     $exec_requete = mysqli_query($db_handle, $query);
 
-                    if ($exec_requete) {
+                    if($exec_requete) {
                         $num_rows = mysqli_num_rows($exec_requete);
 
-                        if ($num_rows > 0) {
-                            while ($data = mysqli_fetch_assoc($exec_requete)) {
+                        if($num_rows > 0) {
+                            while($data = mysqli_fetch_assoc($exec_requete)) {
 
                                 $idProfesseur = $data['IDProfesseur'];
 
-                                $queryProfesseur = "SELECT Email FROM professeur where IDProfesseur = '" . $idProfesseur . "'";
+                                $queryProfesseur = "SELECT Email FROM professeur where IDProfesseur = '".$idProfesseur."'";
                                 $exec_requete_professeur = mysqli_query($db_handle, $queryProfesseur);
 
-                                if ($exec_requete_professeur) {
+                                if($exec_requete_professeur) {
                                     $num_rows_Professeur = mysqli_num_rows($exec_requete_professeur);
                                     $data_Professeur = mysqli_fetch_assoc($exec_requete_professeur);
-                                    if ($num_rows_Professeur > 0) {
+                                    if($num_rows_Professeur > 0) {
                                         $emailProfesseur = $data_Professeur['Email'];
                                         $idSession = $data['IDTp'];
                                         $tdGroup = $data['groupTP'];
@@ -130,35 +131,35 @@ if (!isset($_SESSION['utilisateur_ID'])) {
                             }
                         }
                     }
-                } else if ($_SESSION["accountType"] == "administrator") {
+                } else if($_SESSION["accountType"] == "administrator") {
                     $query = "SELECT * from tp WHERE StatusSession = 1";
                     $exec_requete = mysqli_query($db_handle, $query);
 
-                    if ($exec_requete) {
+                    if($exec_requete) {
                         $num_rows = mysqli_num_rows($exec_requete);
 
-                        if ($num_rows > 0) {
-                            while ($data = mysqli_fetch_assoc($exec_requete)) {
+                        if($num_rows > 0) {
+                            while($data = mysqli_fetch_assoc($exec_requete)) {
 
                                 $idAssistant = $data['IDAssistant'];
                                 $idProfesseur = $data['IDProfesseur'];
 
-                                $queryAssistant = "SELECT Email FROM assistant where IDAssistant = '" . $idAssistant . "'";
+                                $queryAssistant = "SELECT Email FROM assistant where IDAssistant = '".$idAssistant."'";
                                 $exec_requete_Assistant = mysqli_query($db_handle, $queryAssistant);
 
-                                $queryProfesseur = "SELECT Email FROM professeur where IDProfesseur = '" . $idProfesseur . "'";
+                                $queryProfesseur = "SELECT Email FROM professeur where IDProfesseur = '".$idProfesseur."'";
                                 $exec_requete_professeur = mysqli_query($db_handle, $queryProfesseur);
 
-                                if ($exec_requete_Assistant) {
+                                if($exec_requete_Assistant) {
                                     $num_rows_Assistant = mysqli_num_rows($exec_requete_Assistant);
                                     $data_Assistant = mysqli_fetch_assoc($exec_requete_Assistant);
-                                    if ($num_rows_Assistant > 0) {
+                                    if($num_rows_Assistant > 0) {
 
-                                        if ($exec_requete_professeur) {
+                                        if($exec_requete_professeur) {
                                             $num_rows_Professeur = mysqli_num_rows($exec_requete_professeur);
                                             $data_Professeur = mysqli_fetch_assoc($exec_requete_professeur);
 
-                                            if ($num_rows_Professeur > 0) {
+                                            if($num_rows_Professeur > 0) {
                                                 $emailProfesseur = $data_Professeur['Email'];
                                                 $emailAssistant = $data_Assistant['Email'];
                                                 $idSession = $data['IDTp'];

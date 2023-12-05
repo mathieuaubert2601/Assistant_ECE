@@ -7,8 +7,9 @@ $database = "id21625993_assistante_ece";
 $db_handle = mysqli_connect("localhost", "id21625993_adminece", "123456789aA@");
 $db_found = mysqli_select_db($db_handle, $database);
 
-if (!isset($_SESSION['utilisateur_ID'])) {
+if(!isset($_SESSION['utilisateur_ID'])) {
     header('Location: index.php');
+    exit();
 }
 ?>
 

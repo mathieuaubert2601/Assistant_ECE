@@ -7,8 +7,9 @@ $database = "id21625993_assistante_ece";
 $db_handle = mysqli_connect("localhost", "id21625993_adminece", "123456789aA@");
 $db_found = mysqli_select_db($db_handle, $database);
 
-if (!isset($_SESSION['utilisateur_ID'])) {
+if(!isset($_SESSION['utilisateur_ID'])) {
     header('Location: index.php');
+    exit();
 }
 ?>
 
@@ -50,6 +51,17 @@ if (!isset($_SESSION['utilisateur_ID'])) {
                 </tr>
             </table>
             <input type="submit" name="addAssistantButton" value="Ajouter">
+            <?php
+            if(isset($_GET['erreur'])) {
+                $err = $_GET['erreur'];
+                if($err == 1 || $err == 2)
+                    echo "<p style='color:red'>Certains champs n'ont pas été complétés</p>";
+                else if($err == 3)
+                    echo "<p style='color:red'>Les deux mots de passe ne sont pas identiques</p>";
+                else if($err == 4)
+                    echo "<p style='color:red'>Cet email est déja existant</p>";
+            }
+            ?>
         </form>
     </div>
 </body>

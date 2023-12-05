@@ -7,7 +7,7 @@ $database = "id21625993_assistante_ece";
 $db_handle = mysqli_connect("localhost", "id21625993_adminece", "123456789aA@");
 $db_found = mysqli_select_db($db_handle, $database);
 
-if (!isset($_SESSION['utilisateur_ID'])) {
+if(!isset($_SESSION['utilisateur_ID'])) {
     header('Location: index.php');
 }
 ?>
@@ -46,7 +46,7 @@ if (!isset($_SESSION['utilisateur_ID'])) {
                 </tr>
 
                 <?php
-                if ($_SESSION["accountType"] == "administrator") {
+                if($_SESSION["accountType"] == "administrator") {
                     echo "<tr>";
                     echo "<td>Entrer l'email de l'assistant</td>";
                     echo "<td><input type='email' name='assistantEmail' required></td>";
@@ -56,12 +56,12 @@ if (!isset($_SESSION['utilisateur_ID'])) {
                     echo "<td>Entrer l'email du professeur : </td>";
                     echo "<td><input type='email' name='teacherEmail' required></td>";
                     echo "</tr>";
-                } else if ($_SESSION["accountType"] == "student") {
+                } else if($_SESSION["accountType"] == "student") {
                     echo "<tr>";
                     echo "<td>Entrer l'email du professeur : </td>";
                     echo "<td><input type='email' name='teacherEmail' required></td>";
                     echo "</tr>";
-                } else if ($_SESSION["accountType"] == "teacher") {
+                } else if($_SESSION["accountType"] == "teacher") {
                     echo "<tr>";
                     echo "<td>Entrer l'email de l'assistant</td>";
                     echo "<td><input type='email' name='assistantEmail' required></td>";
@@ -70,6 +70,15 @@ if (!isset($_SESSION['utilisateur_ID'])) {
                 ?>
             </table>
             <input type="submit" name="addSessionButton" value="Soumettre">
+            <?php
+            if(isset($_GET['erreur'])) {
+                $err = $_GET['erreur'];
+                if($err == 1)
+                    echo "<p style='color:red'>Email professeur inexistant ou incorrect</p>";
+                else if($err == 2)
+                    echo "<p style='color:red'>Email assistant inexistant ou incorrect</p>";
+            }
+            ?>
 
         </form>
     </div>
