@@ -3,6 +3,17 @@
 //Déclarations de la base de données 
 
 session_start();
+
+if(isset($_GET['deconnexion'])) {
+    if($_GET['deconnexion'] == true) {
+        unset($_SESSION['utilisateur_ID']);
+        unset($_SESSION['statusConnexion']);
+        unset($_SESSION['accountType']);
+        header("Location: index.php");
+        exit();
+    }
+}
+
 if(isset($_POST["accountUsername"]) && isset($_POST["accountPassword"]) && isset($_POST["accountType"])) {
 
     $database = "id21625993_assistante_ece";
@@ -17,12 +28,11 @@ if(isset($_POST["accountUsername"]) && isset($_POST["accountPassword"]) && isset
 
     if($username !== "" && $password !== "") {
         if($type == "teacher") {
-            $query = "SELECT IDProfesseur FROM professeur WHERE Email = '".$username."' AND PasswordAccount = '".$password."'";
+            $query = "SELECT IDProfesseur, PasswordAccount FROM professeur WHERE Email = '".$username."'";
         } else if($type == "student") {
-            // Ajoutez les colonnes à sélectionner dans la requête pour les étudiants
-            $query = "SELECT IDAssistant FROM assistant WHERE Email = '".$username."' AND PasswordAccount = '".$password."'";
+            $query = "SELECT IDAssistant, PasswordAccount FROM assistant WHERE Email = '".$username."'";
         } else if($type == "administrator") {
-            $query = 'SELECT idAdministrateur FROM administrateur WHERE Email = "'.$username.'" AND PasswordAccount = "'.$password.'"';
+            $query = 'SELECT idAdministrateur, PasswordAccount FROM administrateur WHERE Email = "'.$username.'"';
         }
 
         $exec_requete = mysqli_query($db_handle, $query);
@@ -32,17 +42,24 @@ if(isset($_POST["accountUsername"]) && isset($_POST["accountPassword"]) && isset
             $row = mysqli_fetch_assoc($exec_requete);
             $num_rows = mysqli_num_rows($exec_requete);
             if($num_rows > 0) {
-                if($type == "administrator")
-                    $_SESSION['utilisateur_ID'] = $row['idAdministrateur'];
-                else if($type == "student")
-                    $_SESSION['utilisateur_ID'] = $row['IDAssistant'];
-                else if($type == "teacher")
-                    $_SESSION['utilisateur_ID'] = $row['IDProfesseur'];
-                $_SESSION['statusConnexion'] = "1";
-                $_SESSION['accountType'] = $type;
+                $hashedPasswordFromDB = $row['PasswordAccount'];
+                if(password_verify($password, $hashedPasswordFromDB)) {
+                    if($type == "administrator")
+                        $_SESSION['utilisateur_ID'] = $row['idAdministrateur'];
+                    else if($type == "student")
+                        $_SESSION['utilisateur_ID'] = $row['IDAssistant'];
+                    else if($type == "teacher")
+                        $_SESSION['utilisateur_ID'] = $row['IDProfesseur'];
+                    $_SESSION['statusConnexion'] = "1";
+                    $_SESSION['accountType'] = $type;
 
-                header('Location: index.php');
-                exit();
+                    header('Location: index.php');
+                    exit();
+                } else {
+                    // Aucun résultat pour cet utilisateur
+                    header('Location: connexion.php?erreur=1'); // utilisateur ou mot de passe incorrect
+                    exit();
+                }
             } else {
                 // Aucun résultat pour cet utilisateur
                 header('Location: connexion.php?erreur=1'); // utilisateur ou mot de passe incorrect
@@ -62,15 +79,7 @@ if(isset($_POST["accountUsername"]) && isset($_POST["accountPassword"]) && isset
     exit();
 }
 
-if(isset($_GET['deconnexion'])) {
-    if($_GET['deconnexion'] == true) {
-        unset($_SESSION['utilisateur_ID']);
-        unset($_SESSION['statusConnexion']);
-        unset($_SESSION['accountType']);
-        header("Location: index.php");
-        exit();
-    }
-}
+
 
 
 ?>

@@ -30,6 +30,7 @@ if(isset($_SESSION["accountType"])) {
                             header('Location: addAssistant.php?erreur=4'); // Email déja existant
                             exit();
                         } else {
+                            $passwordAssistant = password_hash($passwordAssistant, PASSWORD_DEFAULT, ['cost' => 14]);
                             $query = $db_handle->prepare("INSERT INTO assistant (FirstName,LastName,Email,PasswordAccount) VALUES(?,?,?,?)");
                             $query->bind_param("ssss", $firstNameAssistant, $lastNameAssistant, $emailAssistant, $passwordAssistant);
                             $query->execute();

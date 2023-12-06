@@ -30,6 +30,7 @@ if(isset($_SESSION["accountType"])) {
                             header('Location: addTeacher.php?erreur=4'); // Email déja existant
                             exit();
                         } else {
+                            $passwordTeacher = password_hash($passwordTeacher, PASSWORD_DEFAULT, ['cost' => 14]);
                             $query = $db_handle->prepare("INSERT INTO professeur (FirstName,LastName,Email,PasswordAccount) VALUES(?,?,?,?)");
                             $query->bind_param("ssss", $firstNameTeacher, $lastNameTeacher, $emailTeacher, $passwordTeacher);
                             $query->execute();
