@@ -4,16 +4,16 @@ $database = "id21625993_assistante_ece";
 $db_handle = mysqli_connect("localhost", "id21625993_adminece", "123456789aA@");
 $db_found = mysqli_select_db($db_handle, $database);
 
-if(isset($_SESSION['utilisateur_ID'])) {
-  if(isset($_SESSION['accountType'])) {
-    if($_SESSION['accountType'] == 'administrator') {
-      header("Location: adminFirstPage.php");
+if (isset($_SESSION['utilisateur_ID'])) {
+  if (isset($_SESSION['accountType'])) {
+    if ($_SESSION['accountType'] == 'administrator') {
+      header("Location: adminDashboard.php");
       exit;
-    } else if($_SESSION["accountType"] == "teacher") {
-      header("Location: teacherFirstPage.php");
+    } else if ($_SESSION["accountType"] == "teacher") {
+      header("Location: teacherDashboard.php");
       exit;
-    } elseif($_SESSION["accountType"] == "student") {
-      header("Location: assistantFirstPage.php");
+    } elseif ($_SESSION["accountType"] == "student") {
+      header("Location: assistantDashboard.php");
       exit;
     }
   }

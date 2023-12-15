@@ -7,62 +7,149 @@ $database = "id21625993_assistante_ece";
 $db_handle = mysqli_connect("localhost", "id21625993_adminece", "123456789aA@");
 $db_found = mysqli_select_db($db_handle, $database);
 
-if(!isset($_SESSION['utilisateur_ID'])) {
+if (!isset($_SESSION['utilisateur_ID'])) {
     header('Location: index.php');
     exit();
+} else if (isset($_SESSION['accountType'])) {
+    if ($_SESSION['accountType'] != "administrator") {
+        header('Location: index.php');
+        exit();
+    }
 }
 ?>
 
 <!DOCTYPE html>
-
-<html>
+<html lang="fr">
 
 <head>
-    <meta charset="utf-8" />
     <title>Assistant ECE</title>
-    <link rel="stylesheet" href="style.css" media="screen" type="text/css" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="style2.css" />
+    <link rel="stylesheet" href="font-awesome-4.7.0/css/font-awesome.min.css" />
 </head>
 
-<body class="pageFormulairepageFormulaire">
-    <div class="addAssistantSection">
-        <form method="post" action="addAssistantProcessing.php" class="addAssistantForm">
-            <h2>Ajouter un assistant </h2>
-            <table>
-                <tr>
-                    <td>Prénom : </td>
-                    <td><input name="firstNameAssistant" type="text" required></td>
-                </tr>
-                <tr>
-                    <td>Nom : </td>
-                    <td><input name="lastNameAssistant" type="text" required></td>
-                </tr>
-                <tr>
-                    <td>Email : </td>
-                    <td><input name="emailAssistant" type="email" required></td>
-                </tr>
-                <tr>
-                    <td>Mot de passe : </td>
-                    <td><input name="passwordAssistant" type="password" required></td>
-                </tr>
-                <tr>
-                    <td>Confirmer mot de passe : </td>
-                    <td><input name="confirmationPasswordAssistant" type="password" required></td>
-                </tr>
-            </table>
-            <input type="submit" name="addAssistantButton" value="Ajouter">
-            <?php
-            if(isset($_GET['erreur'])) {
-                $err = $_GET['erreur'];
-                if($err == 1 || $err == 2)
-                    echo "<p style='color:red'>Certains champs n'ont pas été complétés</p>";
-                else if($err == 3)
-                    echo "<p style='color:red'>Les deux mots de passe ne sont pas identiques</p>";
-                else if($err == 4)
-                    echo "<p style='color:red'>Cet email est déja existant</p>";
-            }
-            ?>
-        </form>
+<body>
+    <input type="checkbox" name="" id="menu" />
+    <div class="sidebar">
+        <div class="sidebar-brand">
+            <h2><span class="fa fa-user-o"></span>Assistant ECE</h2>
+        </div>
+        <div class="sidebar-menu">
+            <ul>
+                <li>
+                    <a href="adminDashboard.php"><span class="fa fa-home"> </span><span>
+                            Accueil</span></a>
+                </li>
+                <li>
+                    <a href="addSession.php"><span class="fa fa-plus-circle"> </span><span> Ajout Séance</span></a>
+                </li>
+                <li>
+                    <a href="addAssistant.php" class="active"><span class="fa fa-user-plus"> </span><span> Ajout
+                            Assistant</span></a>
+                </li>
+                <li>
+                    <a href="addTeacher.php"><span class="fa fa-user-plus"> </span><span> Ajout Professeur</span></a>
+                </li>
+                <li>
+                    <a href="sessionHistory.php"><span class="fa fa-history"> </span><span> Historique des
+                            séances</span></a>
+                </li>
+                <li>
+                    <a href="teacherManagment.php"><span class="fa fa-user-times"> </span><span> Gestion
+                            Professeurs</span></a>
+                </li>
+                <li>
+                    <a href="assistantManagment.php"><span class="fa fa-user-times"> </span><span> Gestion
+                            Assistants</span></a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="content">
+        <header>
+            <p>
+                <label for="menu"><span class="fa fa-bars"></span></label><span class="accueil">Accueil</span>
+            </p>
+
+            <div id="dropdown" class="user-wrapp">
+                <div>
+                    <?php
+                    if (isset($_SESSION['utilisateur_ID']) && isset($_SESSION['accountType'])) {
+                        if ($_SESSION["accountType"] == "administrator") {
+                            $query = "SELECT FirstName FROM administrateur WHERE idAdministrateur = '" . $_SESSION['utilisateur_ID'] . "' ";
+                            $exec_requete = mysqli_query($db_handle, $query);
+
+                            if ($exec_requete) {
+                                $num_rows = mysqli_num_rows($exec_requete);
+
+                                if ($num_rows > 0) {
+                                    $data = mysqli_fetch_assoc($exec_requete);
+                                    $FirstName = $data["FirstName"];
+                                    echo "<h4>$FirstName</h4>";
+                                    echo "<small>Admin</small>";
+                                }
+                            }
+                        }
+                    }
+
+                    ?>
+
+                </div>
+                <img decoding="async" src="images/icone_utilisateur.png" width="30" height="30" class="logo-admin" />
+                <div class="dropdown-content">
+                    <p><a href="changePassword.php">Changer le mot de passe</a></p>
+                    <p><a href='connexionProcessing.php?deconnexion=true'><span>Déconnexion</span></a></p>
+                </div>
+            </div>
+        </header>
+
+        <main class="body-formulaire">
+            <div class="input-form">
+                <div class="title">
+                    <h2>Ajout d'un assistant</h2>
+                </div>
+                <form method="POST" action="addAssistantProcessing.php">
+                    <div class="user-details">
+                        <div class="input-box">
+                            <span class="details">Prénom</span>
+                            <input name="firstNameAssistant" type="text" placeholder="Entrer le prénom de l Assistant" required>
+                        </div>
+                        <div class="input-box">
+                            <span class="details">Nom</span>
+                            <input name="lastNameAssistant" type="text" placeholder="Entrer le nom de l assistant" required>
+                        </div>
+                        <div class="input-box">
+                            <span class="details">Email</span>
+                            <input name="emailAssistant" type="email" placeholder="Entrer l email de l assistant" required>
+                        </div>
+                        <div class="input-box">
+                            <span class="details">Mot de passe</span>
+                            <input name="passwordAssistant" type="password" placeholder="Entrer un mot de passe" required>
+                        </div>
+                        <div class="input-box">
+                            <span class="details">Confirmer mot de passe</span>
+                            <input name="confirmationPasswordAssistant" type="password" placeholder="Confirmer le mot de passe" required>
+                        </div>
+
+                    </div>
+                    <div class="button-formulaire">
+                        <input type="submit" name="addAssistantButton" value="Ajouter">
+                    </div>
+                    <?php
+                    if (isset($_GET['erreur'])) {
+                        $err = $_GET['erreur'];
+                        if ($err == 1 || $err == 2)
+                            echo "<p style='color:red'>Certains champs n'ont pas été complétés</p>";
+                        else if ($err == 3)
+                            echo "<p style='color:red'>Les deux mots de passe ne sont pas identiques</p>";
+                        else if ($err == 4)
+                            echo "<p style='color:red'>Cet email est déja existant</p>";
+                    }
+                    ?>
+                </form>
+            </div>
+        </main>
     </div>
 </body>
 

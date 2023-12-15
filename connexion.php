@@ -7,58 +7,78 @@ $database = "id21625993_assistante_ece";
 $db_handle = mysqli_connect("localhost", "id21625993_adminece", "123456789aA@");
 $db_found = mysqli_select_db($db_handle, $database);
 
-if(isset($_SESSION['utilisateur_ID'])) {
+if (isset($_SESSION['utilisateur_ID'])) {
     header('Location: index.php');
     exit();
 }
 ?>
 
 <!DOCTYPE html>
-
-<html>
+<html lang="fr">
 
 <head>
-    <meta charset="utf-8" />
     <title>Assistant ECE</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css" media="screen" type="text/css" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="style2.css" />
+    <link rel="stylesheet" href="font-awesome-4.7.0/css/font-awesome.min.css" />
 </head>
 
-<body class="pageFormulaire">
-    <div class="connexionSection">
-        <form class="connexionForm" action="connexionProcessing.php" method="post">
-            <h2>Connexion</h2>
-            <table>
-                <tr>
-                    <td>Type de compte : </td>
-                    <td><input type="radio" name="accountType" value="teacher" class="teacherRadio" /> Professeur
-                        <input type="radio" name="accountType" value="student" class="studentRadio" /> Assistant
-                        <input type="radio" name="accountType" value="administrator" class="adminRadio" />
-                        Administrateur
-                    </td>
-                </tr>
-                <tr>
-                    <td>Email :</td>
-                    <td><input type="email" name="accountUsername" required></td>
-                </tr>
-                <tr>
-                    <td>Mot de passe :</td>
-                    <td><input type="password" name="accountPassword" required></td>
-                </tr>
-            </table>
-            <input type="submit" name="connexionButton" value="Connexion">
-            <?php
-            if(isset($_GET['erreur'])) {
-                $err = $_GET['erreur'];
-                if($err == 1)
-                    echo "<p style='color:red'>Utilisateur ou mot de passe incorrect</p>";
-                else if($err == 2)
-                    echo "<p style='color:red'>Utilisateur ou mot de passe non saisis</p>";
-                else if($err == 3)
-                    echo "<p style='color:red'>Aucun type de compte sélectionné</p>";
-            }
-            ?>
-        </form>
+<body>
+    <div class="connexion-content">
+        <div class="imgBox"></div>
+        <div class="contentBox">
+            <div class="formBox">
+                <form action="connexionProcessing.php" method="post">
+                    <h2>Connexion</h2>
+                    <div class="inputBox-title">
+                        <span>Type de compte</span>
+                    </div>
+
+                    <div class="inputBox">
+                        <label class="radioLabel">
+                            <input type="radio" name="accountType" value="teacher" class="teacherRadio" />
+                            Professeur
+                        </label>
+                        <label class="radioLabel">
+                            <input type="radio" name="accountType" value="student" class="studentRadio" />
+                            Assistant
+                        </label>
+                        <label class="radioLabel">
+                            <input type="radio" name="accountType" value="administrator" class="adminRadio" />
+                            Administrateur
+                        </label>
+                    </div>
+                    <div class="inputBox">
+                        <span>Email</span>
+                        <input type="email" name="accountUsername" required>
+                    </div>
+                    <div class="inputBox">
+                        <span>Mot de passe</span>
+                        <input type="password" name="accountPassword" required>
+                    </div>
+                    <div class="inputBox">
+                        <input type="submit" name="connexionButton" value="Connexion">
+                        <a href="forgotPassword.php" class="forgotPassword">Mot de passe oublié</a>
+                    </div>
+
+                    <?php
+                    if (isset($_GET['erreur'])) {
+                        $err = $_GET['erreur'];
+                        if ($err == 1)
+                            echo "<p style='color:red'>Utilisateur ou mot de passe incorrect</p>";
+                        else if ($err == 2)
+                            echo "<p style='color:red'>Utilisateur ou mot de passe non saisis</p>";
+                        else if ($err == 3)
+                            echo "<p style='color:red'>Aucun type de compte sélectionné</p>";
+                        else if ($err == 4)
+                            echo "<p style='color:red'>Votre compte a été suspendu</p>";
+                    }
+                    ?>
+                </form>
+            </div>
+        </div>
+
     </div>
 </body>
 
