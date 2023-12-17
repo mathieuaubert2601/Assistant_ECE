@@ -169,28 +169,27 @@ $_SESSION["lastPage"] = "teacherDashboard.php";
             </div>
 
             <div class="composant">
-                <div class="ventes">
-                    <div class="case">
-                        <div class="header-case">
-                            <h2>Dernière(s) Heure(s) à valider</h2>
-                        </div>
-                        <div class="body-case">
-                            <div class="tableau">
-                                <table width="100%">
-                                    <thead>
-                                        <tr>
-                                            <td>Assistant</td>
-                                            <td>Professeur</td>
-                                            <td>Promo</td>
-                                            <td>TD</td>
-                                            <td>Debut</td>
-                                            <td>Fin</td>
-                                            <td>Valider</td>
+                <div class="case">
+                    <div class="header-case">
+                        <h2>Dernière(s) Heure(s) à valider</h2>
+                    </div>
+                    <div class="body-case">
+                        <div class="tableau">
+                            <table width="100%">
+                                <thead>
+                                    <tr>
+                                        <td>Assistant</td>
+                                        <td>Professeur</td>
+                                        <td>Promo</td>
+                                        <td>TD</td>
+                                        <td>Debut</td>
+                                        <td>Fin</td>
+                                        <td>Valider</td>
 
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <?php
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php
                                         $query = "SELECT * from tp where StatusSession = 0 and IDProfesseur = '" . $_SESSION['utilisateur_ID'] . "'";
                                         $exec_requete = mysqli_query($db_handle, $query);
 
@@ -253,13 +252,11 @@ $_SESSION["lastPage"] = "teacherDashboard.php";
                                         }
 
                                         ?>
-                                    </tbody>
-                                </table>
-                            </div>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
-
             </div>
         </main>
     </div>

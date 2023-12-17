@@ -108,69 +108,66 @@ $_SESSION["lastPage"] = "assistantManagment.php";
 
         <main>
             <div class="composant">
-                <div class="ventes">
-                    <div class="case">
-                        <div class="header-case">
-                            <h2>Assistant(s)</h2>
-                        </div>
-                        <div class="body-case">
-                            <div class="tableau">
-                                <table width="100%">
-                                    <thead>
-                                        <tr>
-                                            <td>ID</td>
-                                            <td>Prénom</td>
-                                            <td>Nom</td>
-                                            <td>Email</td>
-                                            <td>Status</td>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <?php
-                                        $query = "SELECT * from assistant";
-                                        $exec_requete = mysqli_query($db_handle, $query);
+                <div class="case">
+                    <div class="header-case">
+                        <h2>Assistant(s)</h2>
+                    </div>
+                    <div class="body-case">
+                        <div class="tableau">
+                            <table width="100%">
+                                <thead>
+                                    <tr>
+                                        <td>ID</td>
+                                        <td>Prénom</td>
+                                        <td>Nom</td>
+                                        <td>Email</td>
+                                        <td>Status</td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php
+                                    $query = "SELECT * from assistant";
+                                    $exec_requete = mysqli_query($db_handle, $query);
 
-                                        if ($exec_requete) {
-                                            $num_rows = mysqli_num_rows($exec_requete);
-                                            if ($num_rows > 0) {
-                                                while (($data = mysqli_fetch_assoc($exec_requete))) {
-                                                    $idAssistant = $data['IDAssistant'];
-                                                    $firstName = $data['FirstName'];
-                                                    $lastName = $data['LastName'];
-                                                    $email = $data['Email'];
-                                                    $status = $data['statusCompte'];
-                                                    $idSession = $idAssistant;
+                                    if ($exec_requete) {
+                                        $num_rows = mysqli_num_rows($exec_requete);
+                                        if ($num_rows > 0) {
+                                            while (($data = mysqli_fetch_assoc($exec_requete))) {
+                                                $idAssistant = $data['IDAssistant'];
+                                                $firstName = $data['FirstName'];
+                                                $lastName = $data['LastName'];
+                                                $email = $data['Email'];
+                                                $status = $data['statusCompte'];
+                                                $idSession = $idAssistant;
 
-                                                    echo "<tr>";
-                                                    echo "<td>$idAssistant</td>";
-                                                    echo "<td>$firstName</td>";
-                                                    echo "<td>$lastName</td>";
-                                                    echo "<td>$email</td>";
-                                                    if ($status == 0) {
-                                                        echo '<td><span class="status-seance color-three"></span>';
-                                                        echo '<form method="GET" action="deleteAssistantProcessing.php" class="apercuHeureAValider">';
-                                                        echo '<button type="submit" name="idSession" value="' . htmlspecialchars($idSession) . '"><span class="fa fa-times-circle fa-3x"></span></button>';
-                                                        echo "</form>";
-                                                        echo "</td>";
-                                                    } else if ($status == 1) {
-                                                        echo '<td><span class="status-seance color-one"></span>';
-                                                        echo '<form method="GET" action="validateAssistantProcessing.php" class="apercuHeureAValider">';
-                                                        echo '<button type="submit" name="idSession" value="' . htmlspecialchars($idSession) . '"><span class="fa fa-check-circle fa-3x"></span></button>';
-                                                        echo "</form>";
-                                                        echo "</td>";
-                                                    }
-                                                    echo "</tr>";
+                                                echo "<tr>";
+                                                echo "<td>$idAssistant</td>";
+                                                echo "<td>$firstName</td>";
+                                                echo "<td>$lastName</td>";
+                                                echo "<td>$email</td>";
+                                                if ($status == 0) {
+                                                    echo '<td><span class="status-seance color-three"></span>';
+                                                    echo '<form method="GET" action="deleteAssistantProcessing.php" class="apercuHeureAValider">';
+                                                    echo '<button type="submit" name="idSession" value="' . htmlspecialchars($idSession) . '"><span class="fa fa-times-circle fa-3x"></span></button>';
+                                                    echo "</form>";
+                                                    echo "</td>";
+                                                } else if ($status == 1) {
+                                                    echo '<td><span class="status-seance color-one"></span>';
+                                                    echo '<form method="GET" action="validateAssistantProcessing.php" class="apercuHeureAValider">';
+                                                    echo '<button type="submit" name="idSession" value="' . htmlspecialchars($idSession) . '"><span class="fa fa-check-circle fa-3x"></span></button>';
+                                                    echo "</form>";
+                                                    echo "</td>";
                                                 }
+                                                echo "</tr>";
                                             }
                                         }
-                                        ?>
-                                    </tbody>
-                                </table>
-                            </div>
+                                    }
+                                    ?>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
-
             </div>
         </main>
     </div>

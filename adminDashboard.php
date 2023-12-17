@@ -180,97 +180,94 @@ $_SESSION["lastPage"] = "adminDashboard.php";
       </div>
 
       <div class="composant">
-        <div class="ventes">
-          <div class="case">
-            <div class="header-case">
-              <h2>Dernière(s) Heure(s) à valider</h2>
-            </div>
-            <div class="body-case">
-              <div class="tableau">
-                <table width="100%">
-                  <thead>
-                    <tr>
-                      <td>Assistant</td>
-                      <td>Professeur</td>
-                      <td>Promo</td>
-                      <td>TD</td>
-                      <td>Debut</td>
-                      <td>Fin</td>
-                      <td>Valider</td>
+        <div class="case">
+          <div class="header-case">
+            <h2>Dernière(s) Heure(s) à valider</h2>
+          </div>
+          <div class="body-case">
+            <div class="tableau">
+              <table width="100%">
+                <thead>
+                  <tr>
+                    <td>Assistant</td>
+                    <td>Professeur</td>
+                    <td>Promo</td>
+                    <td>TD</td>
+                    <td>Debut</td>
+                    <td>Fin</td>
+                    <td>Valider</td>
 
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <?php
-                    $query = "SELECT * from tp where StatusSession = 0";
-                    $exec_requete = mysqli_query($db_handle, $query);
+                  </tr>
+                </thead>
+                <tbody>
+                  <?php
+                  $query = "SELECT * from tp where StatusSession = 0";
+                  $exec_requete = mysqli_query($db_handle, $query);
 
-                    if ($exec_requete) {
-                      $num_rows = mysqli_num_rows($exec_requete);
-                      $compteurHeureValiderTab = 0;
-                      if ($num_rows > 0) {
-                        while (($data = mysqli_fetch_assoc($exec_requete)) && $compteurHeureValiderTab < 5) {
-                          $idAssistant = $data['IDAssistant'];
-                          $idProfesseur = $data['IDProfesseur'];
-                          $promo = $data['promoTP'];
-                          $idSession = $data['IDTp'];
-                          $groupeTD = $data['groupTP'];
-                          $debut = $data['DateDebut'];
-                          $fin = $data['DateFin'];
+                  if ($exec_requete) {
+                    $num_rows = mysqli_num_rows($exec_requete);
+                    $compteurHeureValiderTab = 0;
+                    if ($num_rows > 0) {
+                      while (($data = mysqli_fetch_assoc($exec_requete)) && $compteurHeureValiderTab < 5) {
+                        $idAssistant = $data['IDAssistant'];
+                        $idProfesseur = $data['IDProfesseur'];
+                        $promo = $data['promoTP'];
+                        $idSession = $data['IDTp'];
+                        $groupeTD = $data['groupTP'];
+                        $debut = $data['DateDebut'];
+                        $fin = $data['DateFin'];
 
-                          $queryEmailAssistant = "SELECT Email FROM assistant WHERE IDAssistant = '" . $idAssistant . "'";
-                          $exec_requete_Email_Assistant = mysqli_query($db_handle, $queryEmailAssistant);
+                        $queryEmailAssistant = "SELECT Email FROM assistant WHERE IDAssistant = '" . $idAssistant . "'";
+                        $exec_requete_Email_Assistant = mysqli_query($db_handle, $queryEmailAssistant);
 
-                          if ($exec_requete_Email_Assistant) {
-                            $num_rows_email_assistant = mysqli_num_rows($exec_requete_Email_Assistant);
-                            if ($num_rows_email_assistant > 0) {
-                              $dataEmailAssistant = mysqli_fetch_assoc($exec_requete_Email_Assistant);
-                              $emailAssistant = $dataEmailAssistant["Email"];
+                        if ($exec_requete_Email_Assistant) {
+                          $num_rows_email_assistant = mysqli_num_rows($exec_requete_Email_Assistant);
+                          if ($num_rows_email_assistant > 0) {
+                            $dataEmailAssistant = mysqli_fetch_assoc($exec_requete_Email_Assistant);
+                            $emailAssistant = $dataEmailAssistant["Email"];
 
-                              $queryEmailProfesseur = "SELECT Email FROM professeur WHERE IDProfesseur  = '" . $idProfesseur . "'";
-                              $exec_requete_Email_Professeur = mysqli_query($db_handle, $queryEmailProfesseur);
+                            $queryEmailProfesseur = "SELECT Email FROM professeur WHERE IDProfesseur  = '" . $idProfesseur . "'";
+                            $exec_requete_Email_Professeur = mysqli_query($db_handle, $queryEmailProfesseur);
 
-                              if ($exec_requete_Email_Professeur) {
-                                $num_rows_email_professeur = mysqli_num_rows($exec_requete_Email_Professeur);
+                            if ($exec_requete_Email_Professeur) {
+                              $num_rows_email_professeur = mysqli_num_rows($exec_requete_Email_Professeur);
 
-                                if ($num_rows_email_professeur > 0) {
-                                  $dataEmailProfesseur = mysqli_fetch_assoc($exec_requete_Email_Professeur);
-                                  $emailProfesseur = $dataEmailProfesseur["Email"];
+                              if ($num_rows_email_professeur > 0) {
+                                $dataEmailProfesseur = mysqli_fetch_assoc($exec_requete_Email_Professeur);
+                                $emailProfesseur = $dataEmailProfesseur["Email"];
 
-                                  echo "<tr>";
-                                  echo "<td>$emailAssistant</td>";
-                                  echo "<td>$emailProfesseur</td>";
-                                  echo "<td>$promo</td>";
-                                  echo "<td>$groupeTD</td>";
-                                  echo "<td>$debut</td>";
-                                  echo "<td>$fin</td>";
-                                  echo "<td class='validateSessionButton'>";
-                                  echo '<form method="GET" action="validerSessionProcessing.php" class="apercuHeureAValider">';
-                                  echo '<button type="submit" name="idSession" value="' . htmlspecialchars($idSession) . '"><span class="fa fa-check-circle fa-3x"></span></button>';
-                                  echo "</form>";
-                                  echo '<form method="GET" action="deleteSessionProcessing.php" class="apercuHeureAValider">';
-                                  echo '<button type="submit" name="idSession" value="' . htmlspecialchars($idSession) . '"><span class="fa fa-times-circle fa-3x"></span></button>';
-                                  echo "</form>";
-                                  echo "</td>";
-                                  echo "</tr>";
-                                }
+                                echo "<tr>";
+                                echo "<td>$emailAssistant</td>";
+                                echo "<td>$emailProfesseur</td>";
+                                echo "<td>$promo</td>";
+                                echo "<td>$groupeTD</td>";
+                                echo "<td>$debut</td>";
+                                echo "<td>$fin</td>";
+                                echo "<td class='validateSessionButton'>";
+                                echo '<form method="GET" action="validerSessionProcessing.php" class="apercuHeureAValider">';
+                                echo '<button type="submit" name="idSession" value="' . htmlspecialchars($idSession) . '"><span class="fa fa-check-circle fa-3x"></span></button>';
+                                echo "</form>";
+                                echo '<form method="GET" action="deleteSessionProcessing.php" class="apercuHeureAValider">';
+                                echo '<button type="submit" name="idSession" value="' . htmlspecialchars($idSession) . '"><span class="fa fa-times-circle fa-3x"></span></button>';
+                                echo "</form>";
+                                echo "</td>";
+                                echo "</tr>";
                               }
                             }
                           }
-
-                          $compteurHeureValiderTab = $compteurHeureValiderTab + 1;
                         }
+
+                        $compteurHeureValiderTab = $compteurHeureValiderTab + 1;
                       }
                     }
+                  }
 
-                    ?>
-                  </tbody>
-                </table>
-              </div>
+                  ?>
+                </tbody>
+              </table>
             </div>
           </div>
         </div>
-
       </div>
     </main>
   </div>

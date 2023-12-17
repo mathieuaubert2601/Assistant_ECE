@@ -170,102 +170,99 @@ $_SESSION["lastPage"] = "assistantDashboard.php";
             </div>
 
             <div class="composant">
-                <div class="ventes">
-                    <div class="case">
-                        <div class="header-case">
-                            <h2>Dernière(s) Heure(s)</h2>
-                            <a href="sessionHistory.php" class="button">
-                                voir plus <span class="fa fa-arrow-right"></span>
-                            </a>
-                        </div>
-                        <div class="body-case">
-                            <div class="tableau">
-                                <table width="100%">
-                                    <thead>
-                                        <tr>
-                                            <td>Assistant</td>
-                                            <td>Professeur</td>
-                                            <td>Promo</td>
-                                            <td>TD</td>
-                                            <td>Debut</td>
-                                            <td>Fin</td>
-                                            <td>Status </td>
+                <div class="case">
+                    <div class="header-case">
+                        <h2>Dernière(s) Heure(s)</h2>
+                        <a href="sessionHistory.php" class="button">
+                            voir plus <span class="fa fa-arrow-right"></span>
+                        </a>
+                    </div>
+                    <div class="body-case">
+                        <div class="tableau">
+                            <table width="100%">
+                                <thead>
+                                    <tr>
+                                        <td>Assistant</td>
+                                        <td>Professeur</td>
+                                        <td>Promo</td>
+                                        <td>TD</td>
+                                        <td>Debut</td>
+                                        <td>Fin</td>
+                                        <td>Status </td>
 
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <?php
-                                        $query = "SELECT * from tp where IDAssistant = '" . $_SESSION['utilisateur_ID'] . "'";
-                                        $exec_requete = mysqli_query($db_handle, $query);
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php
+                                    $query = "SELECT * from tp where IDAssistant = '" . $_SESSION['utilisateur_ID'] . "'";
+                                    $exec_requete = mysqli_query($db_handle, $query);
 
-                                        if ($exec_requete) {
-                                            $num_rows = mysqli_num_rows($exec_requete);
-                                            $compteurHeureValiderTab = 0;
-                                            if ($num_rows > 0) {
-                                                while (($data = mysqli_fetch_assoc($exec_requete)) && $compteurHeureValiderTab < 7) {
-                                                    $idAssistant = $data['IDAssistant'];
-                                                    $idProfesseur = $data['IDProfesseur'];
-                                                    $statusSession = $data['StatusSession'];
-                                                    $promo = $data['promoTP'];
-                                                    $idSession = $data['IDTp'];
-                                                    $groupeTD = $data['groupTP'];
-                                                    $debut = $data['DateDebut'];
-                                                    $fin = $data['DateFin'];
+                                    if ($exec_requete) {
+                                        $num_rows = mysqli_num_rows($exec_requete);
+                                        $compteurHeureValiderTab = 0;
+                                        if ($num_rows > 0) {
+                                            while (($data = mysqli_fetch_assoc($exec_requete)) && $compteurHeureValiderTab < 7) {
+                                                $idAssistant = $data['IDAssistant'];
+                                                $idProfesseur = $data['IDProfesseur'];
+                                                $statusSession = $data['StatusSession'];
+                                                $promo = $data['promoTP'];
+                                                $idSession = $data['IDTp'];
+                                                $groupeTD = $data['groupTP'];
+                                                $debut = $data['DateDebut'];
+                                                $fin = $data['DateFin'];
 
-                                                    $queryEmailAssistant = "SELECT Email FROM assistant WHERE IDAssistant = '" . $idAssistant . "'";
-                                                    $exec_requete_Email_Assistant = mysqli_query($db_handle, $queryEmailAssistant);
+                                                $queryEmailAssistant = "SELECT Email FROM assistant WHERE IDAssistant = '" . $idAssistant . "'";
+                                                $exec_requete_Email_Assistant = mysqli_query($db_handle, $queryEmailAssistant);
 
-                                                    if ($exec_requete_Email_Assistant) {
-                                                        $num_rows_email_assistant = mysqli_num_rows($exec_requete_Email_Assistant);
-                                                        if ($num_rows_email_assistant > 0) {
-                                                            $dataEmailAssistant = mysqli_fetch_assoc($exec_requete_Email_Assistant);
-                                                            $emailAssistant = $dataEmailAssistant["Email"];
+                                                if ($exec_requete_Email_Assistant) {
+                                                    $num_rows_email_assistant = mysqli_num_rows($exec_requete_Email_Assistant);
+                                                    if ($num_rows_email_assistant > 0) {
+                                                        $dataEmailAssistant = mysqli_fetch_assoc($exec_requete_Email_Assistant);
+                                                        $emailAssistant = $dataEmailAssistant["Email"];
 
-                                                            $queryEmailProfesseur = "SELECT Email FROM professeur WHERE IDProfesseur  = '" . $idProfesseur . "'";
-                                                            $exec_requete_Email_Professeur = mysqli_query($db_handle, $queryEmailProfesseur);
+                                                        $queryEmailProfesseur = "SELECT Email FROM professeur WHERE IDProfesseur  = '" . $idProfesseur . "'";
+                                                        $exec_requete_Email_Professeur = mysqli_query($db_handle, $queryEmailProfesseur);
 
-                                                            if ($exec_requete_Email_Professeur) {
-                                                                $num_rows_email_professeur = mysqli_num_rows($exec_requete_Email_Professeur);
+                                                        if ($exec_requete_Email_Professeur) {
+                                                            $num_rows_email_professeur = mysqli_num_rows($exec_requete_Email_Professeur);
 
-                                                                if ($num_rows_email_professeur > 0) {
-                                                                    $dataEmailProfesseur = mysqli_fetch_assoc($exec_requete_Email_Professeur);
-                                                                    $emailProfesseur = $dataEmailProfesseur["Email"];
+                                                            if ($num_rows_email_professeur > 0) {
+                                                                $dataEmailProfesseur = mysqli_fetch_assoc($exec_requete_Email_Professeur);
+                                                                $emailProfesseur = $dataEmailProfesseur["Email"];
 
-                                                                    echo "<tr>";
-                                                                    echo "<td>$emailAssistant</td>";
-                                                                    echo "<td>$emailProfesseur</td>";
-                                                                    echo "<td>$promo</td>";
-                                                                    echo "<td>$groupeTD</td>";
-                                                                    echo "<td>$debut</td>";
-                                                                    echo "<td>$fin</td>";
-                                                                    if ($statusSession == 0) {
-                                                                        echo '<td><span class="status-seance color-two"></span></td>';
-                                                                    }
-                                                                    if ($statusSession == 1) {
-                                                                        echo '<td><span class="status-seance color-three"></span></td>';
-                                                                    }
-                                                                    if ($statusSession == 2) {
-                                                                        echo '<td><span class="status-seance color-one"></span></td>';
-                                                                    }
-                                                                    echo "</tr>";
+                                                                echo "<tr>";
+                                                                echo "<td>$emailAssistant</td>";
+                                                                echo "<td>$emailProfesseur</td>";
+                                                                echo "<td>$promo</td>";
+                                                                echo "<td>$groupeTD</td>";
+                                                                echo "<td>$debut</td>";
+                                                                echo "<td>$fin</td>";
+                                                                if ($statusSession == 0) {
+                                                                    echo '<td><span class="status-seance color-two"></span></td>';
                                                                 }
+                                                                if ($statusSession == 1) {
+                                                                    echo '<td><span class="status-seance color-three"></span></td>';
+                                                                }
+                                                                if ($statusSession == 2) {
+                                                                    echo '<td><span class="status-seance color-one"></span></td>';
+                                                                }
+                                                                echo "</tr>";
                                                             }
                                                         }
                                                     }
-
-                                                    $compteurHeureValiderTab = $compteurHeureValiderTab + 1;
                                                 }
+
+                                                $compteurHeureValiderTab = $compteurHeureValiderTab + 1;
                                             }
                                         }
+                                    }
 
-                                        ?>
-                                    </tbody>
-                                </table>
-                            </div>
+                                    ?>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
-
             </div>
         </main>
     </div>

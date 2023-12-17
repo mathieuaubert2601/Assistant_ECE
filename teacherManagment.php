@@ -108,25 +108,24 @@ $_SESSION["lastPage"] = "teacherManagment.php";
 
         <main>
             <div class="composant">
-                <div class="ventes">
-                    <div class="case">
-                        <div class="header-case">
-                            <h2>Professeur(s)</h2>
-                        </div>
-                        <div class="body-case">
-                            <div class="tableau">
-                                <table width="100%">
-                                    <thead>
-                                        <tr>
-                                            <td>ID</td>
-                                            <td>Prénom</td>
-                                            <td>Nom</td>
-                                            <td>Email</td>
-                                            <td>Status</td>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <?php
+                <div class="case">
+                    <div class="header-case">
+                        <h2>Professeur(s)</h2>
+                    </div>
+                    <div class="body-case">
+                        <div class="tableau">
+                            <table width="100%">
+                                <thead>
+                                    <tr>
+                                        <td>ID</td>
+                                        <td>Prénom</td>
+                                        <td>Nom</td>
+                                        <td>Email</td>
+                                        <td>Status</td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php
                                         $query = "SELECT * from professeur";
                                         $exec_requete = mysqli_query($db_handle, $query);
 
@@ -164,13 +163,11 @@ $_SESSION["lastPage"] = "teacherManagment.php";
                                             }
                                         }
                                         ?>
-                                    </tbody>
-                                </table>
-                            </div>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
-
             </div>
         </main>
     </div>

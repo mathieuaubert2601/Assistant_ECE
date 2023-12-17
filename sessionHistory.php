@@ -165,27 +165,26 @@ $_SESSION["lastPage"] = "sessionHistory.php";
 
         <main>
             <div class="composant">
-                <div class="ventes">
-                    <div class="case">
-                        <div class="header-case">
-                            <h2>Historique des sessions</h2>
-                        </div>
-                        <div class="body-case">
-                            <div class="tableau">
-                                <table width="100%">
-                                    <thead>
-                                        <tr>
-                                            <td>Assistant</td>
-                                            <td>Professeur</td>
-                                            <td>Promo</td>
-                                            <td>TD</td>
-                                            <td>Debut</td>
-                                            <td>Fin</td>
-                                            <td>Status</td>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <?php
+                <div class="case">
+                    <div class="header-case">
+                        <h2>Historique des sessions</h2>
+                    </div>
+                    <div class="body-case">
+                        <div class="tableau">
+                            <table width="100%">
+                                <thead>
+                                    <tr>
+                                        <td>Assistant</td>
+                                        <td>Professeur</td>
+                                        <td>Promo</td>
+                                        <td>TD</td>
+                                        <td>Debut</td>
+                                        <td>Fin</td>
+                                        <td>Status</td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php
 
                                         if (isset($_SESSION["accountType"])) {
                                             if ($_SESSION["accountType"] == "teacher") {
@@ -402,13 +401,11 @@ $_SESSION["lastPage"] = "sessionHistory.php";
 
 
                                         ?>
-                                    </tbody>
-                                </table>
-                            </div>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
-
             </div>
         </main>
     </div>
